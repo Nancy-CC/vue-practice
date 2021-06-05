@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-1</title>
+    <style>
+        .active {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="app"> {{message}}</div> -->
+    <div id="app">
+        <div class="input-num">
+            <button @click="sub">-</button>
+            <span>{{num}}</span>
+            <button @click="add">+</button>
+        </div>
+        <div><img v-show="isShow" src="../vue/img/logo (2).png" alt="">
+            <input type="button" value="change dispaly status" @click="changeIsShow">
+        </div>
+        <div>
+            <p v-if="isShow">timon</p>
+            <p v-if="isShow">timon</p>
+        </div>
+        <div>
+            <img v-bind:src="imgSrc" alt="">
+            <img :src="imgSrc" alt="" :class="{active:isActive}" @click="toggleActive">
+        </div>
+        <div>
+            <input type="button" value="add data" @click="push">
+            <input type="button" value="delete data" @click="popi">
+            <ul>
+                <li v-for="items in arr">
+                    my number:{{items}}
+                </li>
+            </ul>
+            <h2 v-for="item in vegetables" v-bind:title="item.name">
+                {{item.name}}
+            </h2>
+        </div>
+        <div>
+            <input type="button" value="click" @click="doIt(666,777)">
+            <input type="text" @keyup.enter="sayHi">
+        </div>
+        <div>
+            <input type="text" v-model="message">
+            <h2>{{message}}</h2>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--  <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "hello Vue!"
+            }
+        })
+    </script> -->
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                num: 1,
+                isShow: false,
+                imgSrc: "../vue/img/phone1.jpg",
+                isActive: false,
+                message: "hello world",
+                arr: ['a', 'b', 'c'],
+                vegetables: [{
+                    name: "onion"
+                }, {
+                    name: "potato"
+                }]
+            },
+            methods: {
+                add: function() {
+                    if (this.num < 10) {
+                        this.num++;
+                    } else {
+                        alert("max")
+                    }
+                },
+                sub: function() {
+                    if (this.num > 0) {
+                        this.num--;
+                    } else {
+                        alert("min")
+                    }
+                },
+                changeIsShow: function() {
+                    this.isShow = !this.isShow;
+                },
+                toggleActive: function() {
+                    this.isActive = !this.isActive
+                },
+                push: function() {
+                    this.vegetables.push({
+                        name: "cucumber"
+                    })
+                },
+                pop: function() {
+                    this.vegetables.shift();
+                },
+                doIt: function(p1, p2) {
+                    console.log(p1);
+                    console.log(p2);
+                },
+                //use enter display hello
+                sayHi: function() {
+                    alert("hello");
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>
